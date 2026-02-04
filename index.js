@@ -18,10 +18,14 @@ const root = {
     product: () => ({
         "id": Math.random().toString(36).split('.')[1].toUpperCase(),
         "name": "Garden Widget",
-        "description": "Beautiful widget to use in the garden",
+        "description": "Widget in the garden",
         "price": (Math.random() * 1000).toFixed(2),
         "soldout": Math.random() < 0.5,
         "date": new Date().toISOString(),
+        "stores": [
+            { store: "Pasadena"},
+            { store: "Los Angeles"}
+        ],
     })
 };
 
