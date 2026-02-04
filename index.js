@@ -13,7 +13,17 @@ app.get('/', (req, res) => {
     );
 });
 
-const root = { hello: () => "Hi, I'm Péter's first GraphQL server response!"};
+const root = { 
+    hello: () => "Hi, I'm Péter's first GraphQL server response!",
+    product: () => ({
+        "id": Math.random().toString(36).split('.')[1].toUpperCase(),
+        "name": "Garden Widget",
+        "description": "Beautiful widget to use in the garden",
+        "price": (Math.random() * 1000).toFixed(2),
+        "soldout": Math.random() < 0.5,
+        "date": new Date().toISOString(),
+    })
+};
 
 app.use('/graphql', graphqlHTTP({
     schema,
