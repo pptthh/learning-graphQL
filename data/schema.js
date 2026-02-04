@@ -4,7 +4,6 @@ const schema = buildSchema(`
     type Product {
         id: ID
         name: String
-        date: String
         description: String
         price: Float
         soldout: Boolean
@@ -16,7 +15,8 @@ const schema = buildSchema(`
     }
 
     type Query {
-        hello: String
+        getAllProductID: [ID]
+        getAllProduct: [Product]
         getProduct(id: ID): Product
     }
 

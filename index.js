@@ -9,8 +9,7 @@ const app = express();
 
 app.get('/', (req, res) => {
     res.send(
-        '<a href="/graphql">GraphQL</a> is amazing!<br/><br/>'+
-        'Test Hello World query by clickng <a href="/graphql?query=query%7Bhello%7D">here!</a>'
+        '<a href="/graphql">GraphQL</a> is amazing!'
     );
 });
 
