@@ -1,6 +1,7 @@
 import express from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import schema from './data/schema';
+import resolvers from './data/resolvers';
 
 const PORT = 8080;
 
@@ -13,25 +14,9 @@ app.get('/', (req, res) => {
     );
 });
 
-const root = { 
-    hello: () => "Hi, I'm Péter's first GraphQL server response!",
-    product: () => ({
-        "id": Math.random().toString(36).split('.')[1].toUpperCase(),
-        "name": "Garden Widget",
-        "description": "Widget in the garden",
-        "price": (Math.random() * 1000).toFixed(2),
-        "soldout": Math.random() < 0.5,
-        "date": new Date().toISOString(),
-        "stores": [
-            { store: "Pasadena"},
-            { store: "Los Angeles"}
-        ],
-    })
-};
-
 app.use('/graphql', graphqlHTTP({
     schema,
-    rootValue: root,
+    rootValue: resolvers,
     graphiql: true,
 }));
 
