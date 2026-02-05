@@ -14,31 +14,49 @@ class Product {
 const productDatabase = {};
 
 const resolvers = {
-
-    getAllProductID: () => {
-        console.log('Fetching all product IDs');
-        console.log(productDatabase);
-        console.log(Object.keys(productDatabase));
-
-        return Object.keys(productDatabase);
-    },
-    // getAllProduct: () => {
-    //     return Object.values(productDatabase).map((product, index) => {
-    //         return new Product(Object.keys(productDatabase)[index], product);
-    //     });
-    // },
-    getProduct: ({ id }) => {
-        return new Product(id, productDatabase[id]);
-    },
-    createProduct: ({ input }) => {
-        let id = require('crypto').randomBytes(10).toString('hex');
-        console.log('productDatabase:', productDatabase);
-        productDatabase[id] = input;
-        return new Product(id, input);
-    }
+    getAllProductID: () => getAllProductID(),
+    getAllProduct: () => getAllProduct(),
+    getProduct: (i) => getProduct(i),
+    createProduct: (i) => createProduct(i),
 }
 
-console.log('Initial productDatabase:', productDatabase);
+const getProduct = ({ id }) =>
+    id && productDatabase[id]
+        ? new Product(id, productDatabase[id])
+        : null;
+
+const getAllProduct = () => Object.values(productDatabase).map(
+    (product, index) => new Product(Object.keys(productDatabase)[index], product)
+);
+
+const getAllProductID = () => {
+    console.log('Fetching all product IDs');
+    console.log(productDatabase);
+    console.log(Object.keys(productDatabase));
+
+
+    return Object.keys(productDatabase);
+};
+const createProduct = ({ input }) => {
+    let id = Math.random().toString().split('.')[1].substring(12);
+    console.log('productDatabase:', productDatabase);
+    productDatabase[id] = input;
+    return new Product(id, input);
+}
+
+// console.log('Initial productDatabase:', productDatabase);//*
+resolvers.createProduct({
+    input: {
+        name: `Test Product ${Object.keys(productDatabase).length + 1}`,
+        description: `This is a test product (${Object.keys(productDatabase).length + 1})`,
+        price: (Math.random() * 100).toFixed(2),
+        soldout: false,
+        stores: [
+            { store: "Store A" },
+            { store: "Store B" }
+        ]
+    }
+});
 resolvers.createProduct({
     input: {
         name: `Test Product ${Object.keys(productDatabase).length + 1}`,
@@ -52,5 +70,6 @@ resolvers.createProduct({
     }
 });
 
+// /**/// */
 console.log('productDatabase after createProduct:', productDatabase);
 export default resolvers;

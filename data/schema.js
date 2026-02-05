@@ -15,8 +15,8 @@ const schema = buildSchema(`
     }
 
     type Query {
-        getAllProductID: [ID]
-        getAllProduct: [Product]
+        getAllProductID: [ID!]!
+        getAllProduct: [Product!]!
         getProduct(id: ID): Product
     }
 
