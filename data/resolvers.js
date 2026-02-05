@@ -13,6 +13,9 @@ class Product {
 
 const productDatabase = {};
 
+const SOLDOUT = "SOLDOUT";
+const ONSALE = "ONSALE";
+
 const resolvers = {
     getAllProductID: () => getAllProductID(),
     getAllProduct: () => getAllProduct(),
@@ -32,19 +35,17 @@ const getAllProduct = () => Object.values(productDatabase).map(
 const getAllProductID = () => Object.keys(productDatabase);
 
 const createProduct = ({ input }) => {
-    let id = Math.random().toString().split('.')[1].substring(12);
-    console.log('productDatabase:', productDatabase);
+    const id = input.id || Math.random().toString().split('.')[1].substring(12);
     productDatabase[id] = input;
     return new Product(id, input);
 }
 
-// console.log('Initial productDatabase:', productDatabase);//*
 resolvers.createProduct({
     input: {
         name: `Test Product ${Object.keys(productDatabase).length + 1}`,
         description: `This is a test product (${Object.keys(productDatabase).length + 1})`,
         price: (Math.random() * 100).toFixed(2),
-        soldout: false,
+        soldout: SOLDOUT,
         stores: [
             { store: "Store A" },
             { store: "Store B" }
@@ -56,7 +57,7 @@ resolvers.createProduct({
         name: `Test Product ${Object.keys(productDatabase).length + 1}`,
         description: `This is a test product (${Object.keys(productDatabase).length + 1})`,
         price: (Math.random() * 100).toFixed(2),
-        soldout: false,
+        soldout: ONSALE,
         stores: [
             { store: "Store A" },
             { store: "Store B" }
@@ -64,6 +65,4 @@ resolvers.createProduct({
     }
 });
 
-// /**/// */
-console.log('productDatabase after createProduct:', productDatabase);
 export default resolvers;

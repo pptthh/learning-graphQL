@@ -1,13 +1,19 @@
 import { buildSchema } from "graphql";
 
-const schema = buildSchema(`
+export default buildSchema(`
     type Product {
         id: ID
         name: String
         description: String
         price: Float
-        soldout: Boolean
+        soldout: Soldout
+        inventory: Int
         stores: [Store]!
+    }
+
+    enum Soldout {
+        SOLDOUT
+        ONSALE
     }
 
     type Store {
@@ -29,7 +35,8 @@ const schema = buildSchema(`
         name: String
         description: String
         price: Float
-        soldout: Boolean
+        soldout: Soldout
+        inventory: Int
         stores: [StoreInput]!
     }
 
@@ -37,5 +44,3 @@ const schema = buildSchema(`
         createProduct(input: ProductInput): Product
     }
 `);
-
-export default schema;
