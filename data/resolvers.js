@@ -29,14 +29,8 @@ const getAllProduct = () => Object.values(productDatabase).map(
     (product, index) => new Product(Object.keys(productDatabase)[index], product)
 );
 
-const getAllProductID = () => {
-    console.log('Fetching all product IDs');
-    console.log(productDatabase);
-    console.log(Object.keys(productDatabase));
+const getAllProductID = () => Object.keys(productDatabase);
 
-
-    return Object.keys(productDatabase);
-};
 const createProduct = ({ input }) => {
     let id = Math.random().toString().split('.')[1].substring(12);
     console.log('productDatabase:', productDatabase);
