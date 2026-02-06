@@ -54,34 +54,10 @@ export default {
 };
 
 const getAllProduct = async () => await Widgets.find();
-// const getAllProduct = async () => {
-//     try {
-//         const products = await Widgets.find();
-//         return products;
-//     } catch (error) {
-//         throw new Error(error);
-//     }
-// };
 
 const getAllProductID = async () => await Widgets.find().then(products => products.map(product => product._id));
-// const getAllProductID = async () => {
-//     try {
-//         const products = await Widgets.find();
-//         return products.map(product => product._id);
-//     } catch (error) {
-//         throw new Error(error);
-//     }
-// };
 
 const findAllCategories = async () => await Categories.findAll();
-// const findAllCategories = async () => {
-//     try {
-//         const categories = await Categories.findAll();
-//         return categories;
-//     } catch (error) {
-//         throw new Error(error);
-//     }
-// };
 
 /***
  * no DB
