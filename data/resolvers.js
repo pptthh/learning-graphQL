@@ -1,3 +1,24 @@
+import { Widgets } from './dbConnectors';
+
+export default {
+    getProduct: async ({ id }) => {
+        try {
+            const product = await Widgets.findById(id);
+            return product;
+        } catch (error) {
+            throw new Error(error);
+        }
+    },
+    createProduct: ({ input }) => {
+        // let id = require('crypto').randomBytes(10).toString('hex');
+        // productDatabase[id] = input;
+        // return new Product(id, input);
+    }
+}
+
+/***
+ * no DB
+ *//*
 import { create } from 'domain';
 
 class Product {
@@ -66,3 +87,4 @@ resolvers.createProduct({
 });
 
 export default resolvers;
+/***/
