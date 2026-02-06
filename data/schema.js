@@ -24,6 +24,12 @@ export default buildSchema(`
         getAllProductID: [ID!]!
         getAllProduct: [Product!]!
         getProduct(id: ID): Product
+        findAllCategories: [Category!]!
+    }
+    
+    type Category {
+        category: String
+        description: String
     }
 
     input StoreInput {
@@ -42,5 +48,7 @@ export default buildSchema(`
 
     type Mutation {
         createProduct(input: ProductInput): Product
+        updateProduct(input: ProductInput): Product
+        deleteProduct(id: ID!): String
     }
 `);

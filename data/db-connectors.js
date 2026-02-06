@@ -5,7 +5,6 @@ import casual from 'casual';
 
 async function connectMongo() {
     console.log('Connecting to MongoDB...');
-    // return;
     try {
         await mongoose.connect('mongodb://localhost/widgets');
         console.log('Connected to MongoDB');
@@ -16,10 +15,9 @@ async function connectMongo() {
 
 async function syncAndSeedCategories() {
     console.log('Syncing SQLite DB and seeding Categories table...');
-    // return;
     try {
         await sequelize.sync( { force: true });
-        console.log('SQLite connectection established and Categories model synced');
+        console.log('SQLite connectection established and Categories model synced\nadd random categories...');
         
         // Seed categories
         await Promise.all(_.times(5, () => {

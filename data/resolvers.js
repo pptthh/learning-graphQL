@@ -1,6 +1,9 @@
-import { Widgets } from './db-connectors';
+import { Widgets, Categories } from './db-connectors';
 
 export default {
+    findAllCategories: () => findAllCategories(),
+    getAllProductID: () => getAllProductID(),
+    getAllProduct: () => getAllProduct(),
     getProduct: async ({ id }) => {
         try {
             const product = await Widgets.findById(id);
@@ -9,13 +12,73 @@ export default {
             throw new Error(error);
         }
     },
+    createProduct: async ({ input }) => {
+       const newWidget = new Widgets({
+            name: input.name,
+            description: input.description,
+            price: input.price,
+            soldout: input.soldout,
+            inventory: input.inventory,
+            stores: input.stores,
+       });
 
-    createProduct: ({ input }) => {
-        // let id = require('crypto').randomBytes(10).toString('hex');
-        // productDatabase[id] = input;
-        // return new Product(id, input);
+       newWidget.id = newWidget._id;
+
+       try {
+            await newWidget.save();
+            return newWidget;
+       } catch (error) {
+            throw new Error(error);
+       }
+    },
+    updateProduct: async ({ input }) => {
+        try {
+            const updateWidget = await Widgets.findOneAndUpdate(
+                    {_id: input.id},
+                    input,
+                    { new: true}
+                );
+            return updateWidget;
+        } catch (error) {
+            throw new Error(error);
+       }
+    },
+    deleteProduct: async ({ id }) => {
+        try {
+            await Widgets.deleteOne({ _id: id });
+            return 'Successfully deleted widget with id: ' + id;
+        } catch (error) {
+            throw new Error(error);
+       }
     }
-}
+};
+
+const getAllProduct = async () => {
+    try {
+        const products = await Widgets.find();
+        return products;
+    } catch (error) {
+        throw new Error(error);
+    }
+};
+
+const getAllProductID = async () => {
+    try {
+        const products = await Widgets.find();
+        return products.map(product => product._id);
+    } catch (error) {
+        throw new Error(error);
+    }
+};
+
+const findAllCategories = async () => {
+    try {
+        const categories = await Categories.findAll();
+        return categories;
+    } catch (error) {
+        throw new Error(error);
+    }
+};
 
 /***
  * no DB
