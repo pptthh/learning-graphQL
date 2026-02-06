@@ -1,4 +1,4 @@
-import { Widgets } from './dbConnectors';
+import { Widgets } from './db-connectors';
 
 export default {
     getProduct: async ({ id }) => {
@@ -9,6 +9,7 @@ export default {
             throw new Error(error);
         }
     },
+
     createProduct: ({ input }) => {
         // let id = require('crypto').randomBytes(10).toString('hex');
         // productDatabase[id] = input;

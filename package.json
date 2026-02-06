@@ -4,6 +4,7 @@
   "description": "https://www.linkedin.com/learning/graphql-essential-training-20298359/",
   "main": "index.js",
   "scripts": {
+    "run1": "babel-node ./index.js",
     "start": "nodemon ./index.js --exec babel-node -e js"
   },
   "author": "",

@@ -8,9 +8,7 @@ const PORT = 8080;
 const app = express();
 
 app.get('/', (req, res) => {
-    res.send(
-        '<a href="/graphql">GraphQL</a> is amazing!'
-    );
+    res.send('<a href="/graphql">GraphQL</a> is amazing!');
 });
 
 app.use('/graphql', graphqlHTTP({
