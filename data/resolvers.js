@@ -4,14 +4,7 @@ export default {
     findAllCategories: () => findAllCategories(),
     getAllProductID: () => getAllProductID(),
     getAllProduct: () => getAllProduct(),
-    getProduct: async ({ id }) => {
-        try {
-            const product = await Widgets.findById(id);
-            return product;
-        } catch (error) {
-            throw new Error(error);
-        }
-    },
+    getProduct: (prop) => getProduct(prop),
     createProduct: async ({ input }) => {
        const newWidget = new Widgets({
             name: input.name,
@@ -58,3 +51,5 @@ const getAllProduct = async () => await Widgets.find();
 const getAllProductID = async () => await Widgets.find().then(products => products.map(product => product._id));
 
 const findAllCategories = async () => await Categories.findAll();
+
+const getProduct = async ({ id }) => await Widgets.findById(id).then(product => product);
