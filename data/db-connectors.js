@@ -45,17 +45,18 @@ const widgetSchema = new mongoose.Schema({
 
 const Widgets = mongoose.model('widgets', widgetSchema);
 
-// const sequelize = new Sequelize('sqlite::memory:');
 const sequelize = new Sequelize({
     dialect: 'sqlite',
-    storage: 'database.sqlite',
+    storage: ':memory:',
+    logging: false,
 });
-// const Categories = sequelize.define('categories', {
-//     category: DataTypes.STRING,
-//     description: DataTypes.STRING,
-// });
 
-// connectMongo();
-// syncAndSeedCategories();
+const Categories = sequelize.define('categories', {
+    category: DataTypes.STRING,
+    description: DataTypes.STRING,
+});
 
-// export { Widgets, Categories };
+connectMongo();
+syncAndSeedCategories();
+
+export { Widgets, Categories };
