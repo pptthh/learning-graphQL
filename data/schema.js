@@ -23,6 +23,7 @@ export default buildSchema(`
     type Query {
         getAllProductID: [ID!]!
         getAllProduct: [Product!]!
+        getAllProducts: [Product]!
         getProduct(id: ID): Product
         findAllCategories: [Category!]!
     }

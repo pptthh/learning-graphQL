@@ -5,6 +5,8 @@ export default {
     getAllProductID: () => getAllProductID(),
     getAllProduct: () => getAllProduct(),
     getProduct: (prop) => getProduct(prop),
+    getAllProducts: async () => await Widgets.find({}),
+
     createProduct: async ({ input }) => {
        const newWidget = new Widgets({
             name: input.name,

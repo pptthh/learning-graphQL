@@ -4,7 +4,6 @@ import _ from 'lodash';
 import casual from 'casual';
 
 async function connectMongo() {
-    console.log('Connecting to MongoDB...');
     try {
         await mongoose.connect('mongodb://localhost/widgets');
         console.log('Connected to MongoDB');
